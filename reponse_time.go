@@ -14,7 +14,9 @@ type XResponseTimer struct {
 
 func (w *XResponseTimer) WriteHeader(statusCode int) {
 	duration := time.Since(w.start)
-	w.Header().Set("X-Response-Time", duration.String())
+	duration := time.Since(start)
+	lan := strconv.FormatInt(duration.Milliseconds(), 10) + "ms"
+	w.Header().Set("X-Response-Time", lan)
 	w.ResponseWriter.WriteHeader(statusCode)
 }
 
